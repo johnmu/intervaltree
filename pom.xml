@@ -10,11 +10,18 @@
     <name>intervaltree</name>
     <url>https://github.com/bioinform</url>
 
+    <licenses>
+        <license>
+            <name>The BSD 3-Clause License</name>
+            <url>http://opensource.org/licenses/BSD-3-Clause</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
-
         <pluginManagement>
             <plugins>
                 <plugin>
