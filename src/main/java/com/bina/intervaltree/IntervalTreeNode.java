@@ -5,8 +5,6 @@ import java.util.ArrayList;
 /**
  * The current design only allows searching for intervals, searching for a point will
  * require creating an interval of length 1.
- * <p/>
- * Created by johnmu on 12/6/14.
  *
  * @author johnmu
  */

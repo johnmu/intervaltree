@@ -1,7 +1,7 @@
 package com.bina.intervaltree;
 
 /**
- * Created by johnmu on 12/17/14.
+ * Defines a closed interval
  */
 public interface Interval1D {
     public long getLeft();

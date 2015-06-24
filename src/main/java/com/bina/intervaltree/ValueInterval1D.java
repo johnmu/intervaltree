@@ -1,7 +1,7 @@
 package com.bina.intervaltree;
 
 /**
- * Created by johnmu on 12/17/14.
+ * Associates a SimpleInterval with a value
  *
  * @author johnmu
  */

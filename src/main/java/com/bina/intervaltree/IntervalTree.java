@@ -1,20 +1,14 @@
 package com.bina.intervaltree;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 
 /**
  * Interval tree implemented as an AVL tree
  * This current implementation allows for duplicates
- * <p/>
- * Created by johnmu on 12/6/14.
  *
  * @author johnmu
  */
 public class IntervalTree<Key extends Interval1D> {
-    private final static Logger log = Logger.getLogger(IntervalTree.class.getName());
     long numEntries = 0;
     private IntervalTreeNode<Key> root = null;
 
@@ -39,123 +33,6 @@ public class IntervalTree<Key extends Interval1D> {
      */
     public IntervalTree(Key data) {
         add(data);
-    }
-
-    /**
-     * Some test code is here
-     * TODO write actual unit tests
-     *
-     * @param args
-     */
-    public static void main(String args[]) {
-        IntervalTree<SimpleInterval1D> test_tree = new IntervalTree<>();
-        log.info("Adding...");
-        test_tree.add(new SimpleInterval1D(10, 20));
-        test_tree.add(new SimpleInterval1D(5, 10));
-        test_tree.add(new SimpleInterval1D(5, 20));
-        test_tree.add(new SimpleInterval1D(15, 20));
-        test_tree.testGetOverlap(new SimpleInterval1D(10, 10));
-        test_tree.testGetOverlap(new SimpleInterval1D(11, 15));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        // test out the rotation
-        test_tree.add(new SimpleInterval1D(-15, 10));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(15, 20));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(40, 60));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(70, 70));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        // keep adding to the right and see if it balances
-
-        test_tree.add(new SimpleInterval1D(20, 20));
-
-        //log.info("Max depth: " + test_tree.maxDepth());
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(30, 34));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(35, 35));
-
-        log.info("*** Print test tree...");
-        test_tree.printTree();
-
-        test_tree.add(new SimpleInterval1D(45, 45));
-        test_tree.add(new SimpleInterval1D(55, 55));
-        test_tree.add(new SimpleInterval1D(65, 65));
-        test_tree.add(new SimpleInterval1D(75, 75));
-        test_tree.add(new SimpleInterval1D(85, 85));
-        test_tree.add(new SimpleInterval1D(55, 55));
-        test_tree.add(new SimpleInterval1D(50, 50));
-        test_tree.add(new SimpleInterval1D(51, 51));
-        test_tree.add(new SimpleInterval1D(52, 52));
-        test_tree.add(new SimpleInterval1D(53, 53));
-        test_tree.add(new SimpleInterval1D(54, 54));
-
-        // see what the tree looks like
-        log.info("Max depth: " + test_tree.maxDepth());
-        log.info("Print test tree...");
-        test_tree.printTree();
-
-        // keep adding to the left and see if it balances
-
-        test_tree.add(new SimpleInterval1D(-10, -10));
-        test_tree.add(new SimpleInterval1D(-20, -20));
-        test_tree.add(new SimpleInterval1D(-30, -30));
-        test_tree.add(new SimpleInterval1D(-40, -40));
-        test_tree.add(new SimpleInterval1D(-50, -50));
-        test_tree.add(new SimpleInterval1D(-60, -60));
-        test_tree.add(new SimpleInterval1D(-70, -70));
-
-
-        // see what the tree looks like
-        log.info("Max depth: " + test_tree.maxDepth());
-        log.info("Print test tree...");
-        test_tree.printTree();
-
-        test_tree.testGetOverlap(new SimpleInterval1D(20, 20));
-        test_tree.testGetOverlap(new SimpleInterval1D(21, 22));
-        test_tree.testGetOverlap(new SimpleInterval1D(30, 31));
-
-        log.info("Do some rotation");
-        log.info("**Rotate right: " + test_tree.rotateRight());
-        log.info("**Rotate right: " + test_tree.rotateRight());
-        log.info("**Rotate right: " + test_tree.rotateRight());
-        log.info("**Rotate right: " + test_tree.rotateRight());
-        log.info("**Rotate right: " + test_tree.rotateRight());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-        log.info("**Rotate left: " + test_tree.rotateLeft());
-
-        test_tree.testGetOverlap(new SimpleInterval1D(20, 20));
-        test_tree.testGetOverlap(new SimpleInterval1D(21, 22));
-        test_tree.testGetOverlap(new SimpleInterval1D(30, 31));
-
-        test_tree.testContains(new SimpleInterval1D(20, 20));
-        test_tree.testContains(new SimpleInterval1D(-45, -45));
     }
 
     /**
@@ -519,37 +396,5 @@ public class IntervalTree<Key extends Interval1D> {
 
     public long size() {
         return numEntries;
-    }
-
-    /**
-     * Ugly print the whole tree
-     */
-    public void printTree() {
-        printTree(root, 0);
-    }
-
-    /**
-     * Ugly print the tree rooted at head
-     *
-     * @param head  start printing from this node
-     * @param level level head is at, this is just for printing
-     */
-    private void printTree(final IntervalTreeNode<Key> head, int level) {
-        log.info(level + ":" + head);
-        if (head != null) {
-            log.info("Right: " + (level + 1));
-            printTree(head.getRight(), level + 1);
-            log.info("Left: " + (level + 1));
-            printTree(head.getLeft(), level + 1);
-        }
-    }
-
-    private void testGetOverlap(Interval1D k) {
-        log.info("Getting..." + k);
-        log.info(StringUtils.join(getOverlaps(k), ','));
-    }
-
-    private void testContains(Interval1D k) {
-        log.info("Contains..." + k + " -- " + contains(k));
     }
 }

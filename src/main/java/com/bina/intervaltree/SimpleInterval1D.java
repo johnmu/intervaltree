@@ -1,7 +1,5 @@
 package com.bina.intervaltree;
 
-import org.apache.log4j.Logger;
-
 import java.util.Random;
 
 /**
@@ -10,7 +8,6 @@ import java.util.Random;
  * @author johnmu
  */
 public class SimpleInterval1D implements Comparable<Interval1D>, Interval1D {
-    private final static Logger log = Logger.getLogger(SimpleInterval1D.class.getName());
     public final long left; // left endpoint, inclusive
     public final long right; // right endpoint, inclusive
 
